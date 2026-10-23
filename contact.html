@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block title %}Developer Chat{% endblock %}
+
+{% block body %}
+<div class="container py-4" style="max-width: 680px;">
+    <div class="card shadow-sm">
+        <div class="card-header bg-dark text-white d-flex align-items-center justify-content-between py-3">
+            <h5 class="mb-0">Chat with Developer</h5>
+            <span class="badge bg-success">Direct Line</span>
+        </div>
+
+        <!-- Chat History Stream -->
+        <div class="card-body p-3" style="max-height: 420px; overflow-y: auto; background-color: #f8f9fa;">
+            {% if messages %}
+                {% for msg in messages %}
+                    <div class="d-flex mb-3 {% if msg.sender_id == session['user_id'] %}justify-content-end{% else %}justify-content-start{% endif %}">
+                        <div class="p-3 rounded-3 shadow-sm {% if msg.sender_id == session['user_id'] %}bg-primary text-white text-end{% else %}bg-white border text-start{% endif %}" style="max-width: 75%;">
+                            <div class="small fw-bold mb-1 opacity-75">{{ msg.username }}</div>
+                            <div style="word-break: break-word;">{{ msg.message_text }}</div>
+                            <div class="small opacity-50 mt-1" style="font-size: 0.72rem;">{{ msg.created_at[11:16] }}</div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-center text-muted my-4">No messages yet. Ask a question or share feedback below!</p>
+            {% endif %}
+        </div>
+
+        <!-- Input Box -->
+        <div class="card-footer bg-white p-3">
+            <form action="/contact" method="POST" class="d-flex gap-2">
+                <input type="hidden" name="recipient_id" value="{{ developer_id }}">
+                <input type="text" name="message" class="form-control" placeholder="Write your message..." required autocomplete="off">
+                <button type="submit" class="btn btn-primary px-4">Send</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

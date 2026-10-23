@@ -1,0 +1,49 @@
+{%  extends "layout.html" %}
+
+{% block title %}
+    Add Questions
+{% endblock %}
+
+{% block body %}
+    <div class="container py-4 text-center">
+        <h2>Add Questions to Your Quiz</h2>
+        <p class="text-muted">
+            Questions added: <strong>{{ total_questions }}</strong> / 5 (minimum)
+        </p>
+
+        <form action="/add" method="POST" class="mx-auto" style="max-width: 500px;">
+            <input type="hidden" name="quiz_id" value="{{ quiz_id }}">
+            <div class="mb-3">
+                <input autocomplete="off" autofocus class="form-control" name="question" placeholder="Enter question" type="text" required>
+            </div>
+            <hr>
+            <div class="mb-3">
+                <input autocomplete="off" autofocus class="form-control mb-2" name="option0" placeholder="Option 1" type="text" required>
+                <input autocomplete="off" autofocus class="form-control mb-2" name="option1" placeholder="Option 2" type="text" required>
+                <input autocomplete="off" autofocus class="form-control mb-2" name="option2" placeholder="Option 3" type="text" required>
+                <input autocomplete="off" autofocus class="form-control mb-2" name="option3" placeholder="Option 4" type="text" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label d-block text-start">Exact text of correct answer:</label>
+                <input autocomplete="off" autofocus class="form-control" name="answer" placeholder="Must match one option exactly" type="text" required>
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+                <button class="btn btn-outline-primary" name="action" value="next" type="submit">
+                    Add Next Question
+                </button>
+
+                {% if total_questions >= 4%}
+                    <button class="btn btn-success" name="action" value="finish" type="submit">
+                        Finish & Save the Quiz
+                    </button>
+                {% else %}
+                    <button class="btn btn-secondary" type="button" disabled title="Add at least 5 questions first">
+                        Finish ({{ 5 - total_questions }} more required)
+                    </button>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+{% endblock %}

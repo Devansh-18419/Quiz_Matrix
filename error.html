@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Error
+{% endblock %}
+
+{% block body %}
+    <style>
+        .error-bg-box{
+            background-image: url("{{ url_for('static', filename='Error.png') }}");
+            background-size: cover;
+            background-position: center;
+            min-height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+
+    <div class="error-bg-box">
+        <div class="alert alert-danger text-center shadow p-4">
+            <h2 class="alert-heading">⚠️ Error ⚠️</h2>
+            <p class="mb-3">{{ error }}</p>
+            <a href="/" class="btn btn-dark">Return to Homepage</a>
+        </div>
+    </div>
+{% endblock %}

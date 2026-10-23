@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Create Quiz
+{% endblock %}
+
+{% block body %}
+    <div class="container py-4">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4">
+                    <h2 class="card-title text-center mb-4">Create a New Quiz</h2>
+
+                    <form action="/create" method="POST" class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="title" class="form-label fw-bold">Quiz Title</label>
+                            <input type="text" class="form-control" id="title" name="title" placeholder="e.g.General Science Quiz" maxlength="100" required autofocus>
+                            <div class="invalid-feedback">
+                                Please provide a title for your quiz.
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="description" class="form-label fw-bold">Description</label>
+                            <textarea class="form-control" id="description" name="description" rows="6" placeholder="e.g., This quiz covers essential General science topics every adult must know." maxlength="500"></textarea>
+                            <div class="invalid-feedback">
+                                Please provide a brief description.
+                            </div>
+                            <div class="form-text text-muted">
+                                Max 500 characters.
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-matrix">
+                                Next: Add Questions &rarr;
+                            </button>
+                            <a href="/" class="btn btn-outline-secondary">
+                                Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (() => {
+            'use strict';
+            const forms = document.querySelectorAll('.needs-validation');
+                Array.from(forms).forEach(form => {
+                    form.addEventListener('submit', event => {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            })();
+    </script>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block body %}
+<div class="container py-4" style="max-width: 720px;">
+    <!-- Profile Card -->
+    <div class="card p-4 shadow-sm mb-4">
+        <div class="d-flex align-items-center gap-3 mb-3">
+            <img src="{{ user.logo_url }}" alt="Avatar" class="rounded-circle border" width="70" height="70" style="object-fit: cover;">
+            <div>
+                <h3 class="mb-0">{{ user.username }}</h3>
+                {% if user.is_admin == 1 %}
+                    <span class="badge bg-danger mt-1">Admin / Developer</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <form action="/me" method="POST">
+            <div class="mb-3 text-start">
+                <label class="form-label fw-bold">Username</label>
+                <input type="text" name="username" class="form-control" value="{{ user.username }}" required>
+            </div>
+            <div class="mb-3 text-start">
+                <label class="form-label fw-bold">Avatar / Logo Image URL</label>
+                <input type="url" name="logo_url" class="form-control" value="{{ user.logo_url }}" placeholder="https://example.com/avatar.png">
+            </div>
+            <button type="submit" class="btn btn-primary">Save Profile Changes</button>
+        </form>
+    </div>
+
+    <!-- Authored Quizzes Management -->
+    <div class="card p-4 shadow-sm mb-4">
+        <h4 class="mb-3">My Quizzes</h4>
+        {% if quizzes %}
+            <ul class="list-group list-group-flush">
+                {% for q in quizzes %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                        <div>
+                            <strong>{{ q.title }}</strong>
+                            <p class="text-muted small mb-0">{{ q.description }}</p>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <a href="/quiz/{{ q.id }}/edit" class="btn btn-sm btn-outline-secondary">Edit Quiz</a>
+                            <a href="/scoreboard/{{ q.id }}" class="btn btn-sm btn-outline-info">Scoreboard</a>
+                            <form action="/delete_quiz/{{ q.id }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this quiz?');">
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                            </form>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-muted mb-0">You have not created any quizzes yet.</p>
+        {% endif %}
+    </div>
+
+    <!-- Danger Zone -->
+    <div class="card p-3 border-danger shadow-sm text-start">
+        <h5 class="text-danger">Danger Zone</h5>
+        <p class="small text-muted mb-2">Permanently delete your account along with all authored quizzes and scores.</p>
+        <a href="/leave" class="btn btn-outline-danger btn-sm align-self-start">Delete Account</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,110 @@
+:root {
+    --bg-dark: #0b0f19;
+    --card-dark: #161e2e;
+    --accent-cyan: #00f2fe;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+}
+
+.quiz-card {
+    background-color: var(--card-dark);
+    border: 1px solid #2d3748;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;          /* Prevents cards from running into each other */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Pushes button tray cleanly to the bottom */
+    min-height: 180px;              /* Gives title & description breathing room */
+}
+
+/* Clear separation for the quiz text content */
+.quiz-card h2,
+.quiz-card h3 {
+    margin-bottom: 0.5rem;
+}
+
+.quiz-card p {
+    color: #a0aec0;
+    margin-bottom: 1.25rem;
+    line-height: 1.5;
+}
+
+/* Action button container */
+.quiz-card .actions,
+.quiz-card .btn-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: auto;               /* Anchors buttons to the bottom of the card */
+    padding-top: 1rem;
+    border-top: 1px solid #2d3748;  /* Subtle divider separating text from buttons */
+}
+
+.btn-matrix {
+    background-color: var(--accent-cyan);
+    color: #000000;
+    border: none;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+}
+
+.btn-matrix:hover {
+    transform: translateY(-2px);
+    background-color: #00d8e6;
+}
+
+.register-link {
+    color: var(--accent-cyan);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register-link:hover {
+    text-decoration: underline;
+    color: #00d8e6;
+}
+
+.btn-matrix-primary {
+    background: linear-gradient(135deg, var(--accent-cyan), #0072ff);
+    color: #0b0f19;
+    font-weight: 600;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-matrix-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 242, 254, 0.3);
+    color: #0b0f19;
+}
+
+.btn-matrix-secondary {
+    background-color: transparent;
+    color: var(--text-primary);
+    border: 2px solid var(--accent-cyan);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s ease;
+}
+
+.btn-matrix-secondary:hover {
+    background-color: var(--accent-cyan);
+    color: #0b0f19;
+    transform: translateY(-2px);
+}

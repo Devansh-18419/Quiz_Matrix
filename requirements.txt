@@ -1,0 +1,7 @@
+Flask
+cs50
+requests
+resend
+beautifulsoup4
+python-dotenv
+Werkzeug

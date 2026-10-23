@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Play quizzes at Quîz Matrîx
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+    <h2 class="mb-4">Quiz Matrix</h2>
+
+    <!-- Wrap everything inside a form -->
+    <form action="" method="POST">
+
+        {% for q in questions %}
+            <div class="card p-3 mb-3 shadow-sm">
+                <h5 class="fw-bold">{{ loop.index }}. {{ q.question_text }}</h5>
+
+                {% if q.question_type == 'text' %}
+                    <div class="mt-2">
+                        <input type="text" name="question_{{ q.id }}" class="form-control" placeholder="Type your answer here..." autocomplete="off" required>
+                    </div>
+                {% else %}
+                    {% for opt in q.options %}
+                        <div class="form-check mt-2">
+                            <input class="form-check-input" type="radio" name="question_{{ q.id }}" value="{{ opt.id }}" id="opt_{{ opt.id }}" required>
+                            <label class="form-check-label" for="opt_{{ opt.id }}">
+                                {{ opt.option_text }}
+                            </label>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <!-- Submit Button Added Here -->
+        <div class="text-center my-4">
+            <button type="submit" class="btn btn-success btn-lg px-5 shadow">Submit Quiz</button>
+        </div>
+
+    </form>
+</div>
+{% endblock %}
